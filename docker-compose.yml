@@ -9,7 +9,7 @@ services:
       MYSQL_ROOT_PASSWORD: sofofrootpassword
       MYSQL_DATABASE: sofof_todo_db
       MYSQL_USER: sofof_todo_user
-      MYSQL_PASSWORD: sofof_todo_pass
+      MYSQL_PASSWORD: Sofof_Todo_Passw0rd!
     ports:
       - "3306:3306"
     volumes:

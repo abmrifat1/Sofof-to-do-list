@@ -13,16 +13,16 @@ export class SequelizeTodoRepository implements TodoRepository {
   private map(entity: TodoEntity): Todo {
     return entity.toJSON() as Todo;
   }
-
+ 
+  async findById(id: string): Promise<Todo | null> {
+    const todoData = await this.todoModel.findByPk(id);
+    return todoData ? this.map(todoData) : null;
+  }
+  
   async findAll(status?: TodoStatusEnum): Promise<Todo[]> {
     const where = status ? { status } : undefined;
     const todoList = await this.todoModel.findAll({ where, order: [['createdAt', 'DESC']] });
     return todoList?.map((e) => this.map(e));
-  }
-
-  async findById(id: string): Promise<Todo | null> {
-    const todoData = await this.todoModel.findByPk(id);
-    return todoData ? this.map(todoData) : null;
   }
 
   async create(todo: Partial<Todo>): Promise<Todo> {

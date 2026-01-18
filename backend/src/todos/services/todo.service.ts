@@ -7,7 +7,7 @@ export class TodoService {
   constructor(@Inject('TodoRepository') private readonly todoService: TodoService) { }
 
   findAll(status?: TodoStatusEnum) {
-    return this.todoService.findAll;
+    return this.todoService.findAll();
   }
 
   findById(id: string) {
