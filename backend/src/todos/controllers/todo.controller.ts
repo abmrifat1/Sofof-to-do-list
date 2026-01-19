@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, UsePipes, ValidationPipe } from "@nestjs/common";
 import { TodoService } from "../services/todo.service";
-import { TodoStatusEnum } from "../entity/todo.entity";
+import { TodoStatus } from "../entity/todo.entity";
 import { CreateSofofTodoDto, UpdateSofofTodoDto } from "../dto/todo.dto";
 
 @Controller('todos')
@@ -9,7 +9,7 @@ export class TodoController {
   constructor(private readonly todoService: TodoService) {}
 
   @Get()
-  findAll(@Query('status') status?: TodoStatusEnum) {
+  findAll(@Query('status') status?: TodoStatus) {
     return this.todoService.findAll(status);
   }
 
@@ -20,6 +20,9 @@ export class TodoController {
 
   @Post()
   create(@Body() payload: CreateSofofTodoDto) {
+    console.log('========payload============================');
+    console.log(payload);
+    console.log('====================================');
     return this.todoService.create(payload);
   }
 

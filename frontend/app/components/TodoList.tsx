@@ -34,7 +34,7 @@ export default function TodoList({ todos, refresh }: { todos: Todo[]; refresh: (
           <div>
             <div className="flex items-center gap-2">
               <h3 className="font-semibold">{t.title}</h3>
-              <span className={`text-xs px-2 py-1 rounded ${t.status === 'DONE' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
+              <span className={`text-xs px-2 py-1 rounded ${t.status === 'DONE' ? 'bg-green-200 text-green-700' : t.status === 'IN_PROGRESS' ? 'bg-blue-200 text-blue-700' : 'bg-yellow-200 text-yellow-700'}`}>
                 {t.status}
               </span>
             </div>

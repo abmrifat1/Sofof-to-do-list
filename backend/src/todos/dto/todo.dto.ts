@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsOptional, IsString } from "class-validator";
-import { TodoStatusEnum } from "../entity/todo.entity";
+import { TodoStatus } from "../entity/todo.entity";
 
 export class CreateSofofTodoDto {
   @IsString()
@@ -9,6 +9,9 @@ export class CreateSofofTodoDto {
   @IsString()
   @IsOptional()
   description?: string;
+
+  @IsOptional()
+  status?: TodoStatus;
 }
 
 export class UpdateSofofTodoDto {
@@ -21,5 +24,5 @@ export class UpdateSofofTodoDto {
   description?: string;
 
   @IsOptional()
-  status?: TodoStatusEnum;
+  status?: TodoStatus;
 }

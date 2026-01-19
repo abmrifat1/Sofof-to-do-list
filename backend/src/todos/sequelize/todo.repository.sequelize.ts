@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Todo, TodoRepository } from '../interface/todo.repository.interface';
-import { TodoEntity, TodoStatusEnum } from '../entity/todo.entity';
+import { TodoEntity, TodoStatus } from '../entity/todo.entity';
 
 @Injectable()
 export class SequelizeTodoRepository implements TodoRepository {
@@ -23,8 +23,11 @@ export class SequelizeTodoRepository implements TodoRepository {
     }
   }
   
-  async findAll(status?: TodoStatusEnum): Promise<Todo[]> {
+  async findAll(status?: TodoStatus): Promise<Todo[]> {
     const where = status ? { status } : undefined;
+    console.log('====================================');
+    console.log(where);
+    console.log('====================================');
     const todoList = await this.todoModel.findAll({ where, order: [['createdAt', 'DESC']] });
     if (todoList?.length > 0) {
       return todoList?.map((e) => this.map(e));

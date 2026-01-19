@@ -1,13 +1,13 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { Todo } from "../interface/todo.repository.interface";
-import { TodoStatusEnum } from "../entity/todo.entity";
+import { TodoStatus } from "../entity/todo.entity";
 
 @Injectable()
 export class TodoService {
   constructor(@Inject('TodoRepository') private readonly todoService: TodoService) { }
 
-  findAll(status?: TodoStatusEnum) {
-    return this.todoService.findAll();
+  findAll(status?: TodoStatus) {
+    return this.todoService.findAll(status);
   }
 
   findById(id: string) {

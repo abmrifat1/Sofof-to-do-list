@@ -9,7 +9,7 @@ import {
   UpdatedAt,
 } from 'sequelize-typescript';
 
-export enum TodoStatusEnum {
+export enum TodoStatus {
   PENDING = 'PENDING',
   IN_PROGRESS = 'IN_PROGRESS',
   DONE = 'DONE',
@@ -29,11 +29,11 @@ export class TodoEntity extends Model<TodoEntity> {
   declare description?: string;
 
   @Column({
-    type: DataType.ENUM(...Object.values(TodoStatusEnum)),
+    type: DataType.ENUM(...Object.values(TodoStatus)),
     allowNull: false,
-    defaultValue: TodoStatusEnum.PENDING,
+    defaultValue: TodoStatus.PENDING,
   })
-  declare status: TodoStatusEnum;
+  declare status: TodoStatus;
 
   @CreatedAt
   @Default(DataType.NOW)
