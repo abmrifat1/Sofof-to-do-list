@@ -5,6 +5,9 @@ import * as jwt from 'jsonwebtoken';
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
   use(req: Request & { user?: any }, res: Response, next: NextFunction) {
+    if (req.method === 'OPTIONS') {
+      return next();
+    }
     const auth = req.headers['authorization'];
     if (!auth) throw new UnauthorizedException('Missing Auth header');
 
