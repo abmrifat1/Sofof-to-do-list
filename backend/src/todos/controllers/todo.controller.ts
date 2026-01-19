@@ -20,9 +20,6 @@ export class TodoController {
 
   @Post()
   create(@Body() payload: CreateSofofTodoDto) {
-    console.log('========payload============================');
-    console.log(payload);
-    console.log('====================================');
     return this.todoService.create(payload);
   }
 

@@ -25,9 +25,6 @@ export class SequelizeTodoRepository implements TodoRepository {
   
   async findAll(status?: TodoStatus): Promise<Todo[]> {
     const where = status ? { status } : undefined;
-    console.log('====================================');
-    console.log(where);
-    console.log('====================================');
     const todoList = await this.todoModel.findAll({ where, order: [['createdAt', 'DESC']] });
     if (todoList?.length > 0) {
       return todoList?.map((e) => this.map(e));

@@ -12,7 +12,7 @@ export default function LoginClient() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+  const apiUrl = process.env.API_URL || 'http://localhost:3001';
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();

@@ -8,9 +8,6 @@ export class AuthController {
   @Post('login')
   login(@Body() user: {userName: string, password: string}) {
     const { userName, password } = user;
-    console.log('====================================');
-    console.log(user);
-    console.log('====================================');
     if (userName === 'Sofof Tech' && password === '123456') {
       const payload = { username: userName };
       const token = jwt.sign(payload, authJwtConstants?.secret as jwt.Secret, { expiresIn: authJwtConstants.expiresIn as number });

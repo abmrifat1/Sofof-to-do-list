@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getToken, setToken } from '../lib/auth'; // adjust path if needed
+import { getToken, setToken } from '../lib/auth';
 
 export default function Navbar() {
   const [token, setTokenState] = useState<string | null>(null);
@@ -11,9 +11,6 @@ export default function Navbar() {
 
   useEffect(() => {
     setTokenState(getToken());
-    console.log('===========Navbar=========================');
-    console.log(token);
-    console.log('====================================');
   }, [token]);
 
 
