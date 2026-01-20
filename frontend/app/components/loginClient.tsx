@@ -14,7 +14,7 @@ export default function LoginClient() {
 
   const apiUrl = process.env.API_URL || 'http://localhost:3001';
 
-  async function submit(e: React.FormEvent) {
+  async function onSubmitClick(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
     setLoading(true);
@@ -35,7 +35,7 @@ export default function LoginClient() {
   }
 
   return (
-    <form onSubmit={submit} className="bg-white p-6 rounded shadow w-full max-w-md">
+    <form onSubmit={onSubmitClick} className="bg-white p-6 rounded shadow w-full max-w-md">
       <h1 className="text-xl font-bold mb-4">Login</h1>
 
       {error && <div className="text-red-600 mb-2">{error}</div>}

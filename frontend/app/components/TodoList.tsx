@@ -3,11 +3,11 @@
 import { Todo } from '../types/todo';
 import { api } from '../lib/api';
 
-export default function TodoList({ todos, refresh }: { todos: Todo[]; refresh: () => void }) {
+export default function TodoList({ todos, fetchTodoList }: { todos: Todo[]; fetchTodoList: () => void }) {
   async function markDone(id: string) {
     try {
       await api.put(`/todos/${id}`, { status: 'DONE' });
-      refresh();
+      fetchTodoList();
     } catch (err) {
       alert('Failed to update todo');
     }
@@ -17,7 +17,7 @@ export default function TodoList({ todos, refresh }: { todos: Todo[]; refresh: (
     if (!confirm('Delete this todo?')) return;
     try {
       await api.delete(`/todos/${id}`);
-      refresh();
+      fetchTodoList();
     } catch (err) {
       alert('Failed to delete todo');
     }

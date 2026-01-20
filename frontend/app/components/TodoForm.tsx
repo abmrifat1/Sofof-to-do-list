@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { api } from '../lib/api';
 import { TodoStatus } from '../types/todo';
 
-export default function TodoForm({ onCreated }: { onCreated: () => void }) {
+export default function TodoForm({ fetchTodoList }: { fetchTodoList: () => void }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ export default function TodoForm({ onCreated }: { onCreated: () => void }) {
       setTitle('');
       setDescription('');
       setStatus('PENDING');
-      onCreated();
+      fetchTodoList();
     } catch (err: any) {
       setError(err.response?.data?.message ?? 'Failed to create todo');
     } finally {
@@ -35,7 +35,7 @@ export default function TodoForm({ onCreated }: { onCreated: () => void }) {
     <form onSubmit={submit} className="mb-4 space-y-2">
       {error && <div className="text-red-600">{error}</div>}
 
-      <div className="flex flex-col md:flex-row md:items-center gap-2 bg-green-200 p-4 rounded">
+      <div className="flex flex-col md:flex-row md:items-center gap-2 bg-green-200 p-3 rounded">
         <input
           className="w-full md:flex-1 min-w-0 border p-2 rounded"
           placeholder="Title"

@@ -6,17 +6,16 @@ import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 import { api } from '../lib/api';
 import { getToken, setToken } from '../lib/auth';
-import Link from 'next/link';
 import type { Todo } from '../types/todo';
 
 export default function TodoAppClient() {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [statusFilter, setStatusFilter] = useState<string | undefined | number | string[]>('');
+  const [statusFilter, setStatusFilter] = useState<string>('');
   const [loading, setLoading] = useState(true);
   const [jwtToken, setJwtToken] = useState<string | null>('');
   const router = useRouter();
 
-  async function fetchTodos() {
+  async function fetchTodoList() {
     setLoading(true);
     try {
       const qs = statusFilter ? `?status=${statusFilter}` : '';
@@ -32,7 +31,7 @@ export default function TodoAppClient() {
         router.push('/login');
       } else if (err?.response?.status === 404) {
         setTodos([]);
-      } 
+      }
       else {
         console.error('Failed to load todos', err);
       }
@@ -46,18 +45,11 @@ export default function TodoAppClient() {
     const token = getToken();
     setJwtToken(token)
     if (!token) {
-      // setLoading(false);
-      router.push('/login'); // redirect if no token
+      router.push('/login');
       return;
     }
-    fetchTodos();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetchTodoList();
   }, [statusFilter]);
-
-  function handleLogout() {
-    setToken(null);
-    router.push('/login');
-  }
 
   return (
     <div>
@@ -98,8 +90,9 @@ export default function TodoAppClient() {
             </div>
           </div>
 
-          <TodoForm onCreated={fetchTodos} />
-          {loading ? <div>Loading...</div> : <TodoList todos={todos} refresh={fetchTodos} />}</>
+          {statusFilter === '' ? <TodoForm fetchTodoList={fetchTodoList} /> : <></>}
+          {loading ? <div>Loading...</div> : <TodoList todos={todos} fetchTodoList={fetchTodoList} />}
+        </>
       }
 
     </div>
