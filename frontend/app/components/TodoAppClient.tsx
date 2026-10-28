@@ -7,6 +7,7 @@ import TodoList from './TodoList';
 import { api } from '../lib/api';
 import { getToken, setToken } from '../lib/auth';
 import type { Todo } from '../types/todo';
+import { Button } from '@abmrifat1/js-ui-component-library';
 
 export default function TodoAppClient() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -80,12 +81,8 @@ export default function TodoAppClient() {
               </div>
 
               <div className="flex items-center gap-2 justify-end">
-                <button
-                  onClick={() => setStatusFilter('')}
-                  className="text-sm px-3 py-2 rounded-md border border-gray-200 bg-gray-50 hover:bg-gray-100"
-                >
-                  Reset
-                </button>
+                <Button style={{marginTop: 15}} onClick={() => setStatusFilter('')} align="left" size="small" color="white" outline="default">
+                  Reset</Button>
               </div>
             </div>
           </div>
